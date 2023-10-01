@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        #clock-display{
+            background-color: rgb(179, 179, 243);
+            text-align: right;
+        }
+
+        @keyframes rotateImage {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Apply the animation to images */
+        .rotating-image {
+            animation: rotateImage 2s linear infinite;
+        }
+    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time</title>
+    <script>
+        function updateTime() {
+            // Get the element where you want to display the time
+            var clockDisplay = document.getElementById('clock-display');
+            var currentTimestamp = new Date();
+            var hours = currentTimestamp.getHours();
+            var minutes = currentTimestamp.getMinutes();
+            var seconds = currentTimestamp.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Format the time as HH:MM:SS AM/PM
+            var formattedTime = (hours % 12 || 12) + ':' +
+                                (minutes < 10 ? '0' : '') + minutes + ':' +
+                                (seconds < 10 ? '0' : '') + seconds + ' ' + ampm;
+
+            // Update the display
+            clockDisplay.textContent = formattedTime;
+        }
+
+        // Update the time every second
+        setInterval(updateTime, 1000);
+
+        // Initialize the time on page load
+        // window.onload = updateTime;
+    </script>
+</head>
+<body>
+    <div class="clock">
+        
+        <h1 id="clock-display">{{ current_time }}</h1>
+    </div>
+</body>
+<body>
+    <div class="image-rotator">
+        <img src="{% static 'image1.jpg' %}" alt="Image 1">
+        <img src="{% static 'image2.jpg' %}" alt="Image 2">
+        <img src="{% static 'image3.jpg' %}" alt="Image 3">
+        <img src="{% static 'image4.jpg' %}" alt="Image 4">
+        <img src="{% static 'image5.jpg' %}" alt="Image 5">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
